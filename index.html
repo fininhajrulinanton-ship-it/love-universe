@@ -1,1336 +1,547 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Екатерина II Великая 👑</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Love Universe | Бесконечная нежность</title>
 
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #9b59b6;
-            --accent-color: #e74c3c;
-            --gold-color: #f1c40f;
-            --dark-color: #2c3e50;
-            --light-color: #ecf0f1;
-        }
+<style>
+    * {
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+    }
 
-        body {
-            font-family: 'Georgia', serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            background-attachment: fixed;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: radial-gradient(circle at 30% 10%, #110022, #030006);
+        font-family: 'Segoe UI', 'Arial', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+        touch-action: manipulation;
+        position: relative;
+    }
 
-        /* Анимации */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    /* центральное мягкое свечение — создаёт эффект любовного тумана */
+    .center-glow {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 380px;
+        height: 380px;
+        background: radial-gradient(circle, rgba(255,100,200,0.3), rgba(155,80,220,0.1) 60%, transparent 90%);
+        transform: translate(-50%, -50%);
+        filter: blur(45px);
+        pointer-events: none;
+        z-index: 0;
+        will-change: transform;
+    }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    /* динамические элементы: плавающие слова */
+    .item {
+        position: absolute;
+        white-space: nowrap;
+        pointer-events: none;
+        will-change: transform;
+        z-index: 20;
+        filter: drop-shadow(0 0 4px rgba(0,0,0,0.2));
+        animation: floatUp linear forwards;
+    }
 
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-80px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
+    /* текстовая стилизация — мягкое сияние */
+    .love-text {
+        display: inline-block;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        text-shadow: 0 0 8px currentColor, 0 0 3px rgba(255,255,200,0.8);
+        backdrop-filter: blur(1px);
+        white-space: nowrap;
+    }
 
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(80px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+    /* ключевая анимация подъёма с лёгким смещением */
+    @keyframes floatUp {
+        0% {
+            transform: translateY(100vh) translateX(0) rotate(0deg);
+            opacity: 0;
         }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        8% {
+            opacity: 1;
         }
-
-        @keyframes glow {
-            0% { 
-                box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
-            }
-            50% { 
-                box-shadow: 0 0 20px rgba(52, 152, 219, 0.8);
-            }
-            100% { 
-                box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
-            }
+        92% {
+            opacity: 1;
         }
-
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(1deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
+        100% {
+            transform: translateY(-180vh) translateX(calc(30px * var(--drift, 1))) rotate(calc(12deg * var(--rot, 1)));
+            opacity: 0;
         }
+    }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-8px);}
-            60% {transform: translateY(-4px);}
+    /* ❄️ снежинки (мелкие нежные частицы) */
+    .snow {
+        position: absolute;
+        background: radial-gradient(circle, #ffffff, #ffe0fc);
+        border-radius: 50%;
+        opacity: 0.6;
+        pointer-events: none;
+        will-change: transform;
+        filter: blur(0.5px);
+        box-shadow: 0 0 2px rgba(255,220,240,0.6);
+        animation: snowfall linear forwards;
+    }
+
+    @keyframes snowfall {
+        0% {
+            transform: translateY(-10vh) translateX(0);
+            opacity: 0.5;
         }
-
-        @keyframes zoomIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes typewriter {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        @keyframes blinkCaret {
-            from, to { border-color: transparent; }
-            50% { border-color: var(--gold-color); }
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
-        }
-
-        @keyframes rotate3D {
-            from { transform: rotateY(0deg); }
-            to { transform: rotateY(360deg); }
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-            20%, 40%, 60%, 80% { transform: translateX(5px); }
-        }
-
-        /* Стили навигации */
-        .navbar {
-            background: linear-gradient(135deg, var(--dark-color), #34495e);
-            color: white;
-            padding: 1rem 0;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.4);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(15px);
-            border-bottom: 2px solid rgba(255,255,255,0.1);
-            animation: fadeInDown 0.8s ease-out;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .nav-logo {
-            font-size: 2.2rem;
-            font-weight: bold;
-            background: linear-gradient(45deg, var(--gold-color), #ff6b6b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: pulse 3s infinite, glow 2s infinite;
-            cursor: pointer;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-        }
-
-        .nav-logo:hover {
-            animation: shake 0.5s ease, pulse 3s infinite, glow 2s infinite;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
-
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            position: relative;
-            overflow: hidden;
-            display: block;
-            cursor: pointer;
-            font-weight: 600;
-            border: 2px solid transparent;
-            background: rgba(255,255,255,0.05);
-        }
-
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .nav-link:hover::before {
-            left: 100%;
-        }
-
-        .nav-link:hover {
-            color: var(--gold-color);
-            background: rgba(255,255,255,0.1);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            border-color: var(--gold-color);
-            animation: bounce 0.5s ease;
-        }
-
-        .nav-link.active {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            animation: glow 2s infinite;
-            border-color: var(--gold-color);
-        }
-
-        .nav-icon {
-            margin-right: 8px;
-            font-size: 1.2em;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .section {
-            padding: 9rem 2rem 4rem;
-            min-height: 100vh;
-            display: none;
-            animation: fadeInUp 0.8s ease-out;
-            position: relative;
-            z-index: 1;
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        #home {
-            display: block;
-        }
-
-        .hero {
-            background: rgba(255,255,255,0.1);
-            color: white;
-            padding: 4rem 3rem;
-            text-align: center;
-            border-radius: 20px;
-            margin-bottom: 3rem;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.15);
-            animation: slideInLeft 1s ease-out;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: float 8s ease-in-out infinite;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .crown-icon {
-            font-size: 3.5rem;
-            color: var(--gold-color);
-            margin-bottom: 1rem;
-            animation: bounce 2s infinite, glow 3s infinite;
-        }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            font-weight: 300;
-            background: linear-gradient(45deg, #fff, var(--gold-color), #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: fadeInUp 1s ease-out 0.3s both;
-        }
-
-        .hero-content h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
+        10% {
             opacity: 0.9;
-            font-weight: 300;
-            animation: fadeInUp 1s ease-out 0.5s both;
         }
+        90% {
+            opacity: 0.7;
+        }
+        100% {
+            transform: translateY(110vh) translateX(calc(25px * var(--sway, 1)));
+            opacity: 0;
+        }
+    }
 
-        .reign-period {
-            font-size: 1.4rem;
-            margin-bottom: 2rem;
-            font-style: italic;
+    /* 💥 вспышка касания — эффект "поцелуй вселенной" */
+    .flash {
+        position: fixed;
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255,200,230,0.85), rgba(255,120,180,0.4) 40%, transparent 80%);
+        pointer-events: none;
+        z-index: 100;
+        animation: burstFlash 0.55s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+        will-change: transform, opacity;
+    }
+
+    @keyframes burstFlash {
+        0% {
+            transform: scale(0.2);
+            opacity: 0.8;
+        }
+        50% {
+            transform: scale(1.3);
             opacity: 0.9;
-            animation: fadeInUp 1s ease-out 0.7s both;
-            color: var(--gold-color);
         }
-
-        .quick-facts {
-            background: rgba(255,255,255,0.12);
-            padding: 2.5rem;
-            border-radius: 20px;
-            margin: 2rem auto;
-            max-width: 700px;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.15);
-            animation: slideInRight 1s ease-out 0.9s both;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
+        100% {
+            transform: scale(2.2);
+            opacity: 0;
         }
+    }
 
-        .quick-facts:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    /* маленькая звёздная частица при клике (доп. магия) */
+    .spark {
+        position: fixed;
+        width: 6px;
+        height: 6px;
+        background: radial-gradient(circle, #fff5b0, #ffb3e6);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 101;
+        animation: sparkleFly 0.7s ease-out forwards;
+    }
+
+    @keyframes sparkleFly {
+        0% {
+            transform: scale(0.2) translate(0, 0);
+            opacity: 1;
         }
-
-        .quick-facts h3 {
-            margin-bottom: 1.5rem;
-            font-size: 1.6rem;
-            color: #fff;
-            text-align: center;
+        100% {
+            transform: scale(0) translate(calc(40px * var(--dx, 1)), calc(-40px * var(--dy, 1)));
+            opacity: 0;
         }
-
-        .quick-facts ul {
-            list-style: none;
-            text-align: left;
-        }
-
-        .quick-facts li {
-            margin: 1rem 0;
-            padding: 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
-            border-radius: 10px;
-            position: relative;
-            overflow: hidden;
-            background: rgba(255,255,255,0.05);
-            padding-left: 1rem;
-        }
-
-        .quick-facts li::before {
-            display: none;
-        }
-
-        .quick-facts li:hover {
-            background: rgba(255,255,255,0.1);
-            transform: translateX(8px);
-            padding-left: 1.5rem;
-        }
-
-        .quick-facts strong {
-            color: var(--gold-color);
-            font-weight: 600;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .biography-section {
-            background: rgba(255,255,255,0.95);
-            padding: 2.5rem;
-            margin: 2rem 0;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            border-left: 5px solid var(--primary-color);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .biography-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-            border-left-color: var(--gold-color);
-        }
-
-        .biography-section h2 {
-            color: var(--dark-color);
-            margin-bottom: 1.5rem;
-            border-bottom: 3px solid var(--primary-color);
-            padding-bottom: 0.8rem;
-            font-size: 1.8rem;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .section-icon {
-            font-size: 1.6em;
-            animation: float 4s ease-in-out infinite;
-        }
-
-        .biography-section:hover h2 {
-            border-bottom-color: var(--gold-color);
-            color: var(--secondary-color);
-        }
-
-        .achievements-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .achievement-card {
-            background: rgba(255,255,255,0.95);
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            transition: all 0.5s ease;
-            border-top: 4px solid var(--primary-color);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .achievement-card:hover {
-            transform: translateY(-8px) rotate(1deg);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-            border-top-color: var(--gold-color);
-        }
-
-        .achievement-card h3 {
-            color: var(--dark-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .achievement-icon {
-            font-size: 1.3em;
-            animation: bounce 2s infinite;
-        }
-
-        .timeline {
-            position: relative;
-            max-width: 900px;
-            margin: 3rem auto;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-
-        .timeline-event {
-            background: rgba(255,255,255,0.95);
-            padding: 2rem;
-            margin: 2.5rem 0;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            position: relative;
-            width: calc(50% - 3rem);
-            transition: all 0.4s ease;
-            border: 2px solid transparent;
-        }
-
-        .timeline-event::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 20px;
-            height: 20px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            transform: translateY(-50%);
-            transition: all 0.3s ease;
-        }
-
-        .timeline-event:nth-child(odd) {
-            margin-left: 0;
-            margin-right: auto;
-            animation: slideInLeft 0.8s ease-out;
-        }
-
-        .timeline-event:nth-child(odd)::before {
-            right: -42px;
-        }
-
-        .timeline-event:nth-child(even) {
-            margin-left: auto;
-            margin-right: 0;
-            animation: slideInRight 0.8s ease-out;
-        }
-
-        .timeline-event:nth-child(even)::before {
-            left: -42px;
-        }
-
-        .timeline-event:hover {
-            transform: scale(1.03);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-            border-color: var(--gold-color);
-        }
-
-        .timeline-event:hover::before {
-            background: var(--gold-color);
-            transform: translateY(-50%) scale(1.2);
-        }
-
-        .timeline-year {
-            font-weight: bold;
-            color: var(--primary-color);
-            font-size: 1.4rem;
-            margin-bottom: 0.8rem;
-            transition: color 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .year-icon {
-            animation: float 2s infinite;
-        }
-
-        .timeline-event:hover .timeline-year {
-            color: var(--gold-color);
-        }
-
-        /* ИСПРАВЛЕННАЯ ГАЛЕРЕЯ */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .gallery-item {
-            background: rgba(255,255,255,0.95);
-            padding: 1.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            text-align: center;
-            transition: all 0.5s ease;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-        }
-
-        .gallery-image {
-            width: 100%;
-            height: 250px;
-            border-radius: 15px;
-            object-fit: cover;
-            transition: all 0.4s ease;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            font-size: 1.2rem;
-        }
-
-        .gallery-item:hover .gallery-image {
-            transform: scale(1.05);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
-        }
-
-        .image-title {
-            margin-top: 1.2rem;
-            font-weight: bold;
-            color: var(--dark-color);
-            font-size: 1.2rem;
-            transition: color 0.3s ease;
-        }
-
-        .gallery-item:hover .image-title {
-            color: var(--primary-color);
-        }
-
-        /* Модальное окно для галереи */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.9);
-            animation: fadeInUp 0.3s ease;
-        }
-
-        .modal-content {
-            margin: auto;
-            display: block;
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 10px;
-            animation: zoomIn 0.3s ease;
-        }
-
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            z-index: 2001;
-        }
-
-        .close:hover {
-            color: var(--gold-color);
-            transform: rotate(90deg);
-        }
-
-        footer {
-            background: rgba(44, 62, 80, 0.95);
-            color: white;
-            text-align: center;
-            padding: 3rem 2rem;
-            margin-top: 5rem;
-            backdrop-filter: blur(15px);
-            position: relative;
-            z-index: 2;
-            border-top: 3px solid var(--gold-color);
-        }
-
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .footer-content p {
-            margin: 0.8rem 0;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-        }
-
-        .footer-content p:hover {
-            color: var(--gold-color);
-            transform: translateX(5px);
-        }
-
-        .intro-text {
-            max-width: 800px;
-            margin: 2rem auto;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            background: rgba(255,255,255,0.1);
-            padding: 2rem;
-            border-radius: 15px;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.15);
-            animation: fadeInUp 1s ease-out 1s both;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: white;
-            font-size: 3rem;
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
-            animation: fadeInUp 0.8s ease-out;
-            background: linear-gradient(45deg, #fff, var(--gold-color), #e0e0e0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .fade-in {
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .slide-in-left {
-            animation: slideInLeft 0.8s ease-out;
-        }
-
-        .slide-in-right {
-            animation: slideInRight 0.8s ease-out;
-        }
-
-        .zoom-in {
-            animation: zoomIn 0.6s ease-out;
-        }
-
-        .typewriter {
-            overflow: hidden;
-            border-right: 3px solid var(--gold-color);
-            white-space: nowrap;
-            margin: 0 auto;
-            animation: typewriter 3.5s steps(40, end), blinkCaret 0.8s step-end infinite;
-        }
-
-        /* Адаптивность */
-        @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .nav-menu {
-                flex-direction: column;
-                gap: 0.8rem;
-                text-align: center;
-                width: 100%;
-            }
-
-            .nav-link {
-                width: 100%;
-                text-align: center;
-                padding: 1rem;
-            }
-
-            .hero-content h1 {
-                font-size: 2.8rem;
-            }
-
-            .timeline::before {
-                left: 30px;
-            }
-
-            .timeline-event {
-                width: calc(100% - 70px);
-                margin-left: 70px !important;
-                margin-right: 0 !important;
-            }
-
-            .timeline-event::before {
-                left: -42px !important;
-                right: auto !important;
-            }
-
-            .achievements-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section {
-                padding: 10rem 1rem 3rem;
-            }
-
-            .modal-content {
-                max-width: 95%;
-                max-height: 80%;
-            }
-        }
-
-        /* Дополнительные анимации */
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .pulse-slow {
-            animation: pulse 4s infinite;
-        }
-
-        .rotate-slow {
-            animation: rotate3D 8s linear infinite;
-        }
-
-        .shimmer {
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            background-size: 1000px 100%;
-            animation: shimmer 3s infinite;
-        }
-
-        /* Прогресс бар для страницы */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--gold-color), var(--primary-color));
-            z-index: 1001;
-            transition: width 0.3s ease;
-        }
-
-        /* Кнопка "Наверх" */
-        .scroll-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--gold-color);
-            color: var(--dark-color);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 999;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-            animation: bounce 2s infinite;
-        }
-
-        .scroll-to-top:hover {
-            transform: scale(1.1);
-            background: var(--primary-color);
-            color: white;
-        }
-    </style>
+    }
+
+    /* декоративное сообщение внизу (не мешает) */
+    .love-quote {
+        position: fixed;
+        bottom: 18px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 400;
+        color: rgba(255,210,240,0.65);
+        text-shadow: 0 0 5px #ff40b0;
+        background: rgba(0,0,0,0.2);
+        backdrop-filter: blur(4px);
+        width: fit-content;
+        margin: 0 auto;
+        padding: 5px 16px;
+        border-radius: 40px;
+        pointer-events: none;
+        z-index: 15;
+        font-family: monospace;
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+    }
+
+    @media (max-width: 600px) {
+        .love-quote { font-size: 9px; bottom: 12px; white-space: nowrap; }
+        .flash { width: 85px; height: 85px; }
+    }
+</style>
 </head>
 <body>
-    <!-- Прогресс бар -->
-    <div class="progress-bar" id="progressBar"></div>
 
-    <!-- Кнопка "Наверх" -->
-    <div class="scroll-to-top" id="scrollToTop" onclick="scrollToTop()">
-        ↑
-    </div>
+<div class="center-glow"></div>
+<div class="love-quote">✨ коснись экрана — отпусти любовь ✨</div>
 
-    <!-- Навигация -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <h1 class="nav-logo" onclick="showSection('home')">Екатерина II 👑</h1>
-            <ul class="nav-menu">
-                <li><a onclick="showSection('home')" class="nav-link active">
-                    <span class="nav-icon">🏠</span>Главная
-                </a></li>
-                <li><a onclick="showSection('biography')" class="nav-link">
-                    <span class="nav-icon">📚</span>Биография
-                </a></li>
-                <li><a onclick="showSection('achievements')" class="nav-link">
-                    <span class="nav-icon">⭐</span>Достижения
-                </a></li>
-                <li><a onclick="showSection('timeline')" class="nav-link">
-                    <span class="nav-icon">⏳</span>Хронология
-                </a></li>
-                <li><a onclick="showSection('gallery')" class="nav-link">
-                    <span class="nav-icon">🖼️</span>Галерея
-                </a></li>
-            </ul>
-        </div>
-    </nav>
+<script>
+    (function() {
+        // --------------------------------------------------------------
+        //  БОГАТЫЙ НАБОР ФРАЗ НА ИСПАНСКОМ, РУССКОМ, АНГЛИЙСКОМ (романтика)
+        // --------------------------------------------------------------
+        const textPhrases = [
+            "Te amo ❤️", "Amor de mi vida", "Eres preciosa", "My love",
+            "Me encantas", "Mi vida ❤️", "Te amo mucho", "My baby",
+            "Eres mi todo", "My heart", "Siempre contigo", "💖",
+            "Люблю тебя", "Ты моя вселенная", "Моя радость", "Нежность",
+            "Eres mi sueño", "Cada día contigo", "Sweet love", "Eres magia",
+            "Mi cielo", "You & me", "Вечно твоя", "Beso 💋", 
+            "Corazón", "Amor eterno", "Perfecta", "Estrella mía"
+        ];
+        
+        const colorPalette = [
+            "#ff7ae6", "#ffb3f0", "#a0e7ff", "#c28aff", "#ff99c8", 
+            "#7affd9", "#ffaa6b", "#fbc3ff", "#b4f0ff", "#ff6080"
+        ];
 
-    <!-- Главная страница -->
-    <section id="home" class="section active">
-        <div class="container">
-            <div class="hero">
-                <div class="hero-content">
-                    <div class="crown-icon">👑</div>
-                    <h1 class="typewriter">Екатерина II Великая</h1>
-                    <h2>Императрица Всероссийская</h2>
-                    <p class="reign-period">Годы правления: 1762-1796 ✨</p>
-
-                    <div class="quick-facts">
-                        <h3>🎯 Ключевые факты:</h3>
-                        <ul>
-                            <li><strong>🎂 Родилась:</strong> 2 мая 1729 года в Штеттине, Пруссия</li>
-                            <li><strong>⚰️ Умерла:</strong> 17 ноября 1796 года в Санкт-Петербурге, Россия</li>
-                            <li><strong>💑 Супруг:</strong> Пётр III Фёдорович</li>
-                            <li><strong>👑 Династия:</strong> Аскании (по рождению), Гольштейн-Готторп-Романовы (по браку)</li>
-                            <li><strong>👸 Коронована:</strong> 3 октября 1762 года в Успенском соборе Москвы</li>
-                        </ul>
-                    </div>
-
-                    <div class="intro-text">
-                        <p>Екатерина II Великая — одна из самых значительных правительниц в истории России.
-                        Её 34-летнее правление ознаменовалось масштабными реформами, территориальным
-                        расширением империи и расцветом русской культуры. Эпоха Екатерины II вошла
-                        в историю как «золотой век» российского дворянства и период просвещённого абсолютизма. 🌟</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Биография -->
-    <section id="biography" class="section">
-        <div class="container">
-            <h1 class="section-title">📚 Биография Екатерины II</h1>
-
-            <div class="biography-section fade-in">
-                <h2><span class="section-icon">👶</span>Ранние годы и приезд в Россию</h2>
-                <p>Екатерина II, урождённая София Фредерика Августа Ангальт-Цербстская,
-                родилась в немецком княжестве Ангальт-Цербст. В 1744 году была приглашена
-                в Россию императрицей Елизаветой Петровной как невеста для наследника престола
-                Петра Фёдоровича. Приняв православие и получив имя Екатерина Алексеевна,
-                она активно изучала русский язык, обычаи и историю своей новой родины. 🌍</p>
-            </div>
-
-            <div class="biography-section fade-in">
-                <h2><span class="section-icon">👑</span>Восшествие на престол</h2>
-                <p>28 июня 1762 года в результате дворцового переворота Екатерина взошла на престол,
-                свергнув своего непопулярного мужа Петра III. Переворот был поддержан гвардейскими
-                полками и видными государственными деятелями. Правление Петра III длилось всего
-                186 дней, после чего Екатерина была провозглашена императрицей. ⚔️</p>
-            </div>
-
-            <div class="biography-section fade-in">
-                <h2><span class="section-icon">⚖️</span>Правление и реформы</h2>
-                <p>Правление Екатерины II считается «золотым веком» Российской империи.
-                Она проводила политику «просвещённого абсолютизма», переписывалась с
-                французскими философами-просветителями, инициировала создание Уложенной
-                комиссии для разработки нового свода законов. При ней были проведены
-                губернская и судебная реформы, основаны первые в России женские учебные
-                заведения, значительно расширилась территория империи. 📜</p>
-            </div>
-
-            <div class="biography-section fade-in">
-                <h2><span class="section-icon">🏛️</span>Наследие и историческое значение</h2>
-                <p>Екатерина II оставила после себя мощную империю, реформированную систему
-                управления и богатое культурное наследие. Её переписка с французскими
-                просветителями (Вольтером, Дидро) и собственные литературные произведения
-                свидетельствуют о высоком интеллектуальном уровне императрицы.</p>
-
-                <p>При Екатерине II Россия окончательно утвердилась как великая европейская
-                держава, были заложены основы системы образования, развивалась наука и искусство.
-                Несмотря на критику некоторых аспектов её правления, вклад Екатерины Великой
-                в развитие России невозможно переоценить. 🌟</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Достижения -->
-    <section id="achievements" class="section">
-        <div class="container">
-            <h1 class="section-title">⭐ Достижения Екатерины II</h1>
-            <p style="text-align: center; color: white; margin-bottom: 4rem; font-size: 1.4rem;">
-                🚀 За 34 года правления Екатерина II провела масштабные реформы и значительно укрепила Российскую империю
-            </p>
-
-            <div class="achievements-grid">
-                <div class="achievement-card slide-in-left">
-                    <h3><span class="achievement-icon">🗺️</span>Территориальное расширение</h3>
-                    <p>Присоединение Крыма (1783), Северного Причерноморья, Белоруссии, Литвы и части Польши в результате трёх разделов Речи Посполитой 🌍</p>
-                </div>
-                <div class="achievement-card slide-in-right">
-                    <h3><span class="achievement-icon">🏛️</span>Административные реформы</h3>
-                    <p>Губернская реформа 1775 года, создание системы местного самоуправления, реформа Сената 📊</p>
-                </div>
-                <div class="achievement-card slide-in-left">
-                    <h3><span class="achievement-icon">🎓</span>Развитие образования и науки</h3>
-                    <p>Создание системы народных училищ (1786), основание Смольного института, Российская академия наук 📚</p>
-                </div>
-                <div class="achievement-card slide-in-right">
-                    <h3><span class="achievement-icon">🎭</span>Поддержка искусств и культуры</h3>
-                    <p>Основание Эрмитажа, развитие русского театра, литературы, появление первых журналов 🎨</p>
-                </div>
-                <div class="achievement-card slide-in-left">
-                    <h3><span class="achievement-icon">💰</span>Экономическое развитие</h3>
-                    <p>Введение бумажных денег (ассигнаций), развитие промышленности и торговли 📈</p>
-                </div>
-                <div class="achievement-card slide-in-right">
-                    <h3><span class="achievement-icon">🌐</span>Внешняя политика</h3>
-                    <p>Успешные войны с Турцией, Швецией, участие в разделах Польши, провозглашение вооружённого нейтралитета ⚔️</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Хронология -->
-    <section id="timeline" class="section">
-        <div class="container">
-            <h1 class="section-title">⏳ Хронология жизни и правления</h1>
-
-            <div class="timeline">
-                <div class="timeline-event">
-                    <div class="timeline-year"><span class="year-icon">👶</span>1729</div>
-                    <div class="timeline-description">Рождение Софии Фредерики Августы в Штеттине</div>
-                </div>
-                <div class="timeline-event">
-                    <div class="timeline-year"><span class="year-icon">🚢</span>1744</div>
-                    <div class="timeline-description">Прибытие в Россию по приглашению императрицы Елизаветы</div>
-                </div>
-                <div class="timeline-event">
-                    <div class="timeline-year"><span class="year-icon">💒</span>1745</div>
-                    <div class="timeline-description">Брак с наследником престола Петром Фёдоровичем</div>
-                </div>
-                <div class="timeline-event">
-                    <div class="timeline-year"><span class="year-icon">👶</span>1754</div>
-                    <div class="timeline-description">Рождение сына Павла (будущего императора Павла I)</div>
-                </div>
-                <div class="timeline-event">
-                    <div class="timeline-year"><span class="year-icon">👑</span>1762</div>
-                    <div class="timeline-description">Дворцовый переворот и восшествие на престол</div>
-                </div>
-                <div class="timeline-event">
-                    <div class="timeline-year"><span class="year-icon">📜</span>1767</div>
-                    <div class="timeline-description">Создание Уложенной комиссии для разработки новых законов</div>
-                </div>
-                <div class="timeline-event">
-                    <div class="timeline-year"><span class="year-icon">⚔️</span>1773-1775</div>
-                    <div class="timeline-description">Крестьянская война под предводительством Емельяна Пугачёва</div>
-                </div>
-                <div class="timeline-event">
-                    <div class="timeline-year"><span class="year-icon">🏛️</span>1775</div>
-                    <div class="timeline-description">Губернская реформа и манифест о свободе предпринимательства</div>
-                </div>
-                <div class="timeline-event">
-                    <div class="timeline-year"><span class="year-icon">🏖️</span>1783</div>
-                    <div class="timeline-description">Присоединение Крыма к Российской империи</div>
-                </div>
-                <div class="timeline-event">
-                    <div class="timeline-year"><span class="year-icon">📄</span>1785</div>
-                    <div class="timeline-description">Жалованные грамоты дворянству и городам</div>
-                </div>
-                <div class="timeline-event">
-                    <div class="timeline-year"><span class="year-icon">⚰️</span>1796</div>
-                    <div class="timeline-description">Смерть Екатерины II в Зимнем дворце</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Галерея -->
-    <section id="gallery" class="section">
-        <div class="container">
-            <h1 class="section-title">🖼️ Галерея Екатерины II</h1>
-            <p style="text-align: center; color: white; margin-bottom: 4rem; font-size: 1.4rem;">
-                🎨 Портреты и изображения, связанные с жизнью и правлением императрицы
-            </p>
-
-            <div class="gallery-grid">
-                <div class="gallery-item zoom-in">
-                    <img alt="Портрет Екатерины II"
-                         class="gallery-image" src="https://i.pinimg.com/736x/b6/05/37/b60537c297be721fb79539602d451be0.jpg">
-                    <div class="image-title">Портрет молодой Екатерины II</div>
-                </div>
-                <div class="gallery-item zoom-in">
-                    <img src="https://gdb.rferl.org/b6c91565-02d1-46bf-90c7-8ea32d9a1371_w408_r1_s.jpg"
-                         alt="Екатерина II на троне" class="gallery-image">
-                    <div class="image-title">Екатерина II на троне</div>
-                </div>
-                <div class="gallery-item zoom-in">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrk4_6Qy8gwz_KG2FGkziXnEN_VykGD8Jdzw&s"
-                         alt="Парадный портрет" class="gallery-image">
-                    <div class="image-title">Парадный портрет императрицы</div>
-                </div>
-                <div class="gallery-item zoom-in">
-                    <img src="https://img.pac.ru/landmarks/363205/big/7164B2D97F00010160746D00722EC8A6.jpg"
-                         alt="Зимний дворец" class="gallery-image">
-                    <div class="image-title">Зимний дворец - резиденция</div>
-                </div>
-                <div class="gallery-item zoom-in">
-                    <img src="https://artnow.ru/img/974000/974552.jpg"
-                         alt="Эрмитаж" class="gallery-image">
-                    <div class="image-title">Эрмитаж - основан Екатериной</div>
-                </div>
-                <div class="gallery-item zoom-in">
-                    <img src="https://информа.рус/wp-content/uploads/2023/09/Katharina_II-peterburg-scaled.jpg"
-                         alt="Памятник Екатерине" class="gallery-image">
-                    <div class="image-title">Памятник Екатерине II в Петербурге</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Модальное окно для галереи -->
-    <div id="imageModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="modalImage">
-        <div id="modalCaption" style="text-align: center; color: white; padding: 10px; font-size: 1.2rem;"></div>
-    </div>
-
-    <!-- Футер -->
-    <footer>
-        <div class="footer-content">
-            <p>Сайт об Екатерине II Великой</p>
-            <p>Сайт создан на Python</p>
-            <p>Кодировщик и Автор Хайрулин.А</p>
-            <p>Все было создано для Дебатов по истории</p>
-            <p>КОМАНДА N1 МАРИАННЫ</p>
-            <p>Наша команда сила</p>
-        </div>
-    </footer>
-
-    <script>
-        // Основные функции навигации
-        function showSection(sectionId) {
-            // Скрыть все секции
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-
-            // Показать выбранную секцию
-            document.getElementById(sectionId).classList.add('active');
-
-            // Обновить активную ссылку в навигации
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-
-            // Найти и активировать соответствующую ссылку
-            const activeLink = document.querySelector(`a[onclick="showSection('${sectionId}')"]`);
-            if (activeLink) {
-                activeLink.classList.add('active');
+        // -----  НАСТРОЙКИ ПЛОТНОСТИ (оптимизировано) -----
+        const MAX_ITEMS = 48;          // макс количество слов на экране
+        const SNOW_MAX = 70;           // мягкое ограничение снежинок (одновременно)
+        
+        let activeItems = 0;
+        let activeSnow = 0;
+        
+        // Счётчики для мягкого контроля (чтобы не перегружать DOM)
+        function getItemCount() {
+            return document.querySelectorAll('.item').length;
+        }
+        
+        function getSnowCount() {
+            return document.querySelectorAll('.snow').length;
+        }
+        
+        // --------------------------------------------------------------
+        //  СОЗДАНИЕ ПЛАВАЮЩЕГО СЛОВА (оптимизированная версия)
+        // --------------------------------------------------------------
+        function createWordItem(xPos = null, forcedX = false) {
+            // Проверка лимита – предотвращаем чрезмерное накопление
+            if (getItemCount() >= MAX_ITEMS) return null;
+            
+            const element = document.createElement('div');
+            element.className = 'item';
+            
+            // --- разнообразие анимации: слои скорости / дрейфа / вращения ---
+            const layerType = Math.random();   // 0..1
+            let durationSec;
+            let driftFactor;
+            let rotationFactor;
+            
+            if (layerType < 0.33) {
+                // медленные, плавные, парят дольше
+                durationSec = 32 + Math.random() * 8;
+                driftFactor = (Math.random() - 0.5) * 0.9;   // -0.45..0.45
+                rotationFactor = (Math.random() - 0.5) * 0.6;
+            } else if (layerType < 0.67) {
+                // средние
+                durationSec = 20 + Math.random() * 10;
+                driftFactor = (Math.random() - 0.5) * 1.2;
+                rotationFactor = (Math.random() - 0.5) * 0.9;
+            } else {
+                // быстрые, яркие, игривые
+                durationSec = 12 + Math.random() * 7;
+                driftFactor = (Math.random() - 0.5) * 1.7;
+                rotationFactor = (Math.random() - 0.5) * 1.2;
             }
-
-            // Прокрутка к верху страницы
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            // Запуск анимаций для новой секции
+            
+            // индивидуальный масштаб шрифта (приятная вариативность)
+            const fontSizeBase = 14 + Math.random() * 20;  // 14-34px
+            const sizeMulti = (layerType < 0.33) ? 0.85 : (layerType > 0.7 ? 1.2 : 1.0);
+            const finalFontSize = Math.floor(fontSizeBase * sizeMulti);
+            
+            // случайная фраза
+            const randomPhrase = textPhrases[Math.floor(Math.random() * textPhrases.length)];
+            const randomColor = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+            
+            const textSpan = document.createElement('span');
+            textSpan.className = 'love-text';
+            textSpan.textContent = randomPhrase;
+            textSpan.style.fontSize = finalFontSize + 'px';
+            textSpan.style.color = randomColor;
+            textSpan.style.fontWeight = Math.random() > 0.7 ? '700' : '500';
+            
+            // небольшая прозрачность для глубины (0.6 .. 1)
+            const opacityVal = layerType < 0.25 ? 0.6 : (layerType > 0.8 ? 1 : 0.85);
+            element.style.opacity = opacityVal;
+            
+            element.appendChild(textSpan);
+            
+            // --- позиционирование по горизонтали ---
+            let leftPosition;
+            if (forcedX && xPos !== null && !isNaN(xPos)) {
+                leftPosition = Math.min(window.innerWidth - 20, Math.max(5, xPos));
+            } else {
+                leftPosition = Math.random() * (window.innerWidth - 40) + 10;
+            }
+            element.style.left = leftPosition + 'px';
+            
+            // Кастомные CSS-переменные для анимации дрейфа/поворота
+            element.style.setProperty('--drift', driftFactor);
+            element.style.setProperty('--rot', rotationFactor);
+            element.style.animationDuration = durationSec + 's';
+            
+            document.body.appendChild(element);
+            
+            // Автоудаление через анимацию (время + запас)
+            const removalDelay = (durationSec * 1000) + 200;
             setTimeout(() => {
-                animateSection(sectionId);
-            }, 300);
-        }
-
-        // Анимация элементов при скролле
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    
-                    // Добавляем класс для запуска CSS анимаций
-                    if (entry.target.classList.contains('slide-in-left')) {
-                        entry.target.style.animation = 'slideInLeft 0.8s ease-out forwards';
-                    }
-                    if (entry.target.classList.contains('slide-in-right')) {
-                        entry.target.style.animation = 'slideInRight 0.8s ease-out forwards';
-                    }
-                    if (entry.target.classList.contains('zoom-in')) {
-                        entry.target.style.animation = 'zoomIn 0.6s ease-out forwards';
-                    }
-                }
-            });
-        }, observerOptions);
-
-        // Инициализация анимаций
-        document.addEventListener('DOMContentLoaded', () => {
-            // Наблюдаем за элементами с анимациями
-            const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .zoom-in, .achievement-card, .timeline-event, .gallery-item');
-            animatedElements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(el);
-            });
-
-            // Инициализация прогресс бара
-            initProgressBar();
+                if (element && element.isConnected) element.remove();
+            }, removalDelay);
             
-            // Инициализация кнопки "Наверх"
-            initScrollToTop();
-
-            // Предзагрузка изображений галереи
-            preloadGalleryImages();
-        });
-
-        // Анимация для конкретной секции
-        function animateSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            const elements = section.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .zoom-in');
-            
-            elements.forEach((el, index) => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                
-                setTimeout(() => {
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                }, index * 200);
-            });
+            return element;
         }
-
-        // Прогресс бар
-        function initProgressBar() {
-            window.addEventListener('scroll', () => {
-                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrolled = (winScroll / height) * 100;
-                document.getElementById("progressBar").style.width = scrolled + "%";
-            });
-        }
-
-        // Кнопка "Наверх"
-        function initScrollToTop() {
-            const scrollButton = document.getElementById('scrollToTop');
+        
+        // --------------------------------------------------------------
+        //  ❄️ СОЗДАНИЕ СНЕЖИНКИ (нежные, с лёгким покачиванием)
+        // --------------------------------------------------------------
+        function createSnowflake() {
+            if (getSnowCount() > SNOW_MAX) return;
             
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    scrollButton.style.display = 'flex';
-                } else {
-                    scrollButton.style.display = 'none';
-                }
-            });
-        }
-
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        // Модальное окно для галереи
-        function openModal(imageSrc, caption) {
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImage');
-            const captionText = document.getElementById('modalCaption');
+            const snowEl = document.createElement('div');
+            snowEl.className = 'snow';
             
-            modal.style.display = 'block';
-            modalImg.src = imageSrc;
-            modalImg.alt = caption;
-            captionText.innerHTML = caption;
+            const sizePx = 2 + Math.random() * 5;   // 2px - 7px
+            snowEl.style.width = sizePx + 'px';
+            snowEl.style.height = sizePx + 'px';
+            snowEl.style.left = Math.random() * 100 + '%';
             
-            // Добавляем обработчик для закрытия по клику вне изображения
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
+            // Длительность падения (от 7 до 18 секунд)
+            const fallDuration = 7 + Math.random() * 12;
+            snowEl.style.animationDuration = fallDuration + 's';
             
-            // Добавляем обработчик для закрытия по ESC
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    closeModal();
-                }
-            });
-        }
-
-        function closeModal() {
-            document.getElementById('imageModal').style.display = 'none';
-        }
-
-        // Предзагрузка изображений галереи
-        function preloadGalleryImages() {
-            const imageUrls = [
-                'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Catherine_II_by_V.Eriksen.jpg/800px-Catherine_II_by_V.Eriksen.jpg',
-                'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Catherine_II_by_Lampi.jpg/800px-Catherine_II_by_Lampi.jpg',
-                'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Catherine_the_Great_parade_portrait.jpg/800px-Catherine_the_Great_parade_portrait.jpg',
-                'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Winter_Palace_Panorama_4.jpg/800px-Winter_Palace_Panorama_4.jpg',
-                'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Hermitage_Museum_%28General_Staff_Building%29_01.jpg/800px-Hermitage_Museum_%28General_Staff_Building%29_01.jpg',
-                'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Catherine_II_Monument_in_St_Petersburg_02.jpg/800px-Catherine_II_Monument_in_St_Petersburg_02.jpg'
-            ];
-
-            imageUrls.forEach((url, index) => {
-                const img = new Image();
-                img.src = url;
-                img.onload = function() {
-                    // Заменяем placeholder на реальное изображение
-                    const galleryItems = document.querySelectorAll('.gallery-item');
-                    if (galleryItems[index]) {
-                        const galleryImage = galleryItems[index].querySelector('.gallery-image');
-                        galleryImage.innerHTML = '';
-                        galleryImage.style.backgroundImage = `url(${url})`;
-                        galleryImage.style.backgroundSize = 'cover';
-                        galleryImage.style.backgroundPosition = 'center';
-                    }
-                };
-                img.onerror = function() {
-                    // В случае ошибки загрузки оставляем placeholder
-                    const galleryItems = document.querySelectorAll('.gallery-item');
-                    if (galleryItems[index]) {
-                        const galleryImage = galleryItems[index].querySelector('.gallery-image');
-                        galleryImage.innerHTML = '<i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #ff6b6b;"></i><div style="margin-top: 10px; color: #ff6b6b;">Ошибка загрузки</div>';
-                    }
-                };
-            });
-        }
-
-        // Дополнительные анимации при наведении
-        document.querySelectorAll('.nav-logo').forEach(logo => {
-            logo.addEventListener('mouseenter', function() {
-                this.style.animation = 'shake 0.5s ease, pulse 3s infinite, glow 2s infinite';
-            });
+            // лёгкое боковое смещение (горизонтальный дрифт)
+            const sway = (Math.random() - 0.5) * 1.6;
+            snowEl.style.setProperty('--sway', sway);
             
-            logo.addEventListener('mouseleave', function() {
-                this.style.animation = 'pulse 3s infinite, glow 2s infinite';
-            });
-        });
-
-        // Параллакс эффект для фона
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelector('body');
-            parallax.style.backgroundPosition = `center ${scrolled * 0.5}px`;
-        });
-
-        // Анимация появления при загрузке
-        window.addEventListener('load', function() {
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 1s ease';
+            // вариация прозрачности
+            const opacitySnow = 0.3 + Math.random() * 0.65;
+            snowEl.style.opacity = opacitySnow;
             
+            // случайная задержка старта, чтобы не все падали стройно
+            const animDelay = Math.random() * 5;
+            snowEl.style.animationDelay = animDelay + 's';
+            
+            document.body.appendChild(snowEl);
+            
+            // удаление после завершения анимации + запас
+            const removeTimeout = (fallDuration + animDelay) * 1000 + 500;
             setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
-        });
-    </script>
+                if (snowEl && snowEl.isConnected) snowEl.remove();
+            }, removeTimeout);
+        }
+        
+        // --------------------------------------------------------------
+        // 💥 ЭФФЕКТ КАСАНИЯ (вспышка + россыпь искр + дополнительные слова)
+        // --------------------------------------------------------------
+        function burstSparkles(centerX, centerY) {
+            // создаём 6-10 маленьких искр, разлетающихся в стороны
+            const sparkCount = 7 + Math.floor(Math.random() * 8);
+            for (let i = 0; i < sparkCount; i++) {
+                const spark = document.createElement('div');
+                spark.className = 'spark';
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 35 + Math.random() * 55;
+                const dx = Math.cos(angle) * (Math.random() * 1.2 + 0.4);
+                const dy = Math.sin(angle) * (Math.random() * 1.2 + 0.4);
+                spark.style.setProperty('--dx', dx);
+                spark.style.setProperty('--dy', dy);
+                spark.style.left = (centerX - 3) + 'px';
+                spark.style.top = (centerY - 3) + 'px';
+                spark.style.width = (3 + Math.random() * 5) + 'px';
+                spark.style.height = spark.style.width;
+                document.body.appendChild(spark);
+                setTimeout(() => { if(spark.isConnected) spark.remove(); }, 700);
+            }
+        }
+        
+        function touchEffect(clientX, clientY) {
+            // координаты в пределах видимой области
+            let x = Math.min(window.innerWidth - 10, Math.max(10, clientX));
+            let y = Math.min(window.innerHeight - 10, Math.max(10, clientY));
+            
+            // 1) Вспышка (основной визуальный взрыв)
+            const flashDiv = document.createElement('div');
+            flashDiv.className = 'flash';
+            flashDiv.style.left = (x - 55) + 'px';
+            flashDiv.style.top = (y - 55) + 'px';
+            document.body.appendChild(flashDiv);
+            setTimeout(() => flashDiv.remove(), 600);
+            
+            // 2) Добавляем искристые частицы
+            burstSparkles(x, y);
+            
+            // 3) При касании порождаем от 4 до 7 новых слов с центром в области клика
+            const wordsAround = 4 + Math.floor(Math.random() * 5);  // 4..8 слов
+            for (let i = 0; i < wordsAround; i++) {
+                // небольшой разброс по X и Y для естественности, но слова появляются только с горизонтальным положением
+                let offsetX = (Math.random() - 0.5) * 100;
+                let posX = Math.min(window.innerWidth - 30, Math.max(10, x + offsetX));
+                // вызываем создание слова с конкретной позицией (принудительно)
+                if (getItemCount() < MAX_ITEMS + 3) {   // мягкий лимит, но с запасом
+                    createWordItem(posX, true);
+                }
+            }
+            
+            // 4) дополнительно: если снежинок мало, создаём пару снежинок (как магия)
+            if (getSnowCount() < SNOW_MAX - 5) {
+                for (let s = 0; s < 2; s++) {
+                    createSnowflake();
+                }
+            }
+            
+            // 5) лёгкая вибрация для тактильного эффекта (если поддерживается, не навязчиво)
+            if (navigator.vibrate) {
+                navigator.vibrate(12);
+            }
+        }
+        
+        // --------------------------------------------------------------
+        //  ГЕНЕРАЦИЯ ФОНОВЫХ ЭЛЕМЕНТОВ (автоматический режим)
+        // --------------------------------------------------------------
+        let intervalWords = null;
+        let intervalSnow = null;
+        
+        function startBackgroundGenerators() {
+            // Плавающие слова: интервал ~330-420ms, но не чаще, чем нужно (поддержание плотности)
+            intervalWords = setInterval(() => {
+                const currentCount = getItemCount();
+                if (currentCount < MAX_ITEMS - 5) {
+                    // если мало элементов – создаём одно слово
+                    createWordItem();
+                } else if (currentCount < MAX_ITEMS) {
+                    // умеренное создание, чтобы не перегружать, но поддерживать атмосферу
+                    if (Math.random() < 0.45) createWordItem();
+                }
+                // Если достигнут максимум — не создаём лишнего
+            }, 380);
+            
+            // Снежинки каждые 90-140 мс (мягкий снегопад, регулируем общее количество)
+            intervalSnow = setInterval(() => {
+                const snowCnt = getSnowCount();
+                if (snowCnt < SNOW_MAX - 4) {
+                    createSnowflake();
+                } else if (snowCnt < SNOW_MAX) {
+                    if (Math.random() < 0.3) createSnowflake();
+                }
+            }, 110);
+        }
+        
+        // --------------------------------------------------------------
+        //  АДАПТАЦИЯ ПОД ИЗМЕНЕНИЕ РАЗМЕРА ОКНА (чистка старых элементов не требуется)
+        //  Но важно: если окно меняет размер, позиции новых элементов не ломаются
+        // --------------------------------------------------------------
+        function handleResize() {
+            // просто небольшая корректировка: все существующие элементы остаются, 
+            // но ничего критичного – не сбрасываем анимацию. 
+            // Можно дополнительно "подтолкнуть" удаление висящих за экраном, но они сами исчезнут.
+            // Однако нет смысла агрессивно чистить.
+        }
+        
+        // --------------------------------------------------------------
+        //  ОБРАБОТЧИКИ СОБЫТИЙ (touch + mouse)
+        // --------------------------------------------------------------
+        function onUserInteraction(e) {
+            // Получаем координаты для touch или mouse
+            let clientX, clientY;
+            if (e.touches) {
+                // touch событие
+                if (e.touches.length) {
+                    clientX = e.touches[0].clientX;
+                    clientY = e.touches[0].clientY;
+                } else return;
+                e.preventDefault();   // предотвращаем скролл/зум при касаниях (повышает отзывчивость)
+            } else {
+                // mouse / pointer
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
+            
+            if (clientX !== undefined && clientY !== undefined) {
+                touchEffect(clientX, clientY);
+            }
+        }
+        
+        // привязываем события для мобильных и пк
+        document.addEventListener('touchstart', onUserInteraction, { passive: false });
+        document.addEventListener('mousedown', onUserInteraction);
+        
+        // также ловим pointerdown как резерв (без дублирования эффектов, но безопасно)
+        // но чтобы не было двойного срабатывания на мыши + pointer, добавим флаг?
+        // Упростим: используем только mousedown и touchstart. Этого достаточно.
+        
+        // --------------------------------------------------------------
+        //  ИНИЦИАЛИЗАЦИЯ: старт генераторов + небольшое начальное наполнение
+        // --------------------------------------------------------------
+        function initializeUniverse() {
+            startBackgroundGenerators();
+            
+            // Запускаем начальные элементы, чтобы сцена не была пустой
+            for (let i = 0; i < 14; i++) {
+                setTimeout(() => createWordItem(), i * 70);
+            }
+            for (let i = 0; i < 22; i++) {
+                setTimeout(() => createSnowflake(), i * 60);
+            }
+            
+            // добавляем обработчик resize без сильных перестроек
+            window.addEventListener('resize', () => {
+                handleResize();
+            });
+            
+            // бонус: очистка памяти при уходе вкладки в фон (опционально)
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    // не делаем агрессивных действий, просто не создаём лишнего, но интервалы остаются
+                    // легкая экономия: можно ничего не менять, т.к. анимации css паузит браузер
+                }
+            });
+        }
+        
+        // всё запускаем после полной загрузки DOM
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeUniverse);
+        } else {
+            initializeUniverse();
+        }
+        
+        // дополнительная функция для удаления "утечек" - периодическая чистка застрявших элементов раз в 20 секунд (безопасно)
+        setInterval(() => {
+            const allItems = document.querySelectorAll('.item');
+            const allSnow = document.querySelectorAll('.snow');
+            // проверка аномального накопления (баг защита)
+            if (allItems.length > MAX_ITEMS + 10) {
+                // удаляем лишние старые элементы (первые 15% от перебора)
+                const toRemove = allItems.length - MAX_ITEMS;
+                for (let i = 0; i < Math.min(toRemove, 8); i++) {
+                    if (allItems[i]) allItems[i].remove();
+                }
+            }
+            if (allSnow.length > SNOW_MAX + 15) {
+                const toRemoveSnow = allSnow.length - SNOW_MAX;
+                for (let i = 0; i < Math.min(toRemoveSnow, 10); i++) {
+                    if (allSnow[i]) allSnow[i].remove();
+                }
+            }
+        }, 20000);
+    })();
+</script>
 </body>
 </html>
